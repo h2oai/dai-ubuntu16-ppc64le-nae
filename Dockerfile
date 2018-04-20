@@ -9,16 +9,18 @@ RUN curl https://s3.amazonaws.com/artifacts.h2o.ai/releases/ai/h2o/dai/rel-1.1.0
 
 RUN dpkg -i --force-architecture dai_1.1.0_ppc64le.deb
 
-RUN chown -R nimbix:nimbix /opt/h2oai
-
 RUN curl -H 'Cache-Control: no-cache' \
     https://raw.githubusercontent.com/nimbix/image-common/master/install-nimbix.sh \
     | bash
+
+RUN chown -R nimbix:nimbix /opt/h2oai
 
 # Expose port 22 for local JARVICE emulation in docker
 EXPOSE 22
 EXPOSE 12345
 EXPOSE 54321
+
+
 
 COPY run-dai-nimbix.sh /run-dai-nimbix.sh
 
