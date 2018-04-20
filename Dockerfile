@@ -7,7 +7,7 @@ RUN apt-get -y update && \
 
 RUN curl https://s3.amazonaws.com/artifacts.h2o.ai/releases/ai/h2o/dai/rel-1.1.0.cuda9-1/ppc64le-centos7/dai_1.1.0_ppc64le.deb --output dai_1.1.0_ppc64le.deb
 
-RUN dpkg -i dai-1.1.0_ppc64le.deb
+RUN dpkg -i dai_1.1.0_ppc64le.deb
 
 RUN chown -R nimbix:nimbix /opt/h2oai
 
