@@ -1,21 +1,19 @@
 FROM nvidia/cuda-ppc64le:9.0-cudnn7-runtime-ubuntu16.04
 MAINTAINER H2o.ai <ops@h2o.ai>
 
-RUN yum -y update && \
-    yum -y install yum-plugin-ovl && \
-    yum -y install java
+RUN apt-get -y update && \
+    apt-get -y install curl && \
+    apt-get -y install default-jre
 
 RUN curl https://s3.amazonaws.com/artifacts.h2o.ai/releases/ai/h2o/dai/rel-1.1.0.cuda9-1/ppc64le-centos7/dai_1.1.0_ppc64le.deb --output dai_1.1.0_ppc64le.deb
 
-RUN rpm -ivh dai-1.1.0_ppc64le.deb
+RUN dpkg -i dai-1.1.0_ppc64le.deb
 
 RUN chown -R nimbix:nimbix /opt/h2oai
 
-RUN apt-get -y update && \
-    apt-get -y install curl && \
-    curl -H 'Cache-Control: no-cache' \
-        https://raw.githubusercontent.com/nimbix/image-common/master/install-nimbix.sh \
-        | bash
+RUN curl -H 'Cache-Control: no-cache' \
+    https://raw.githubusercontent.com/nimbix/image-common/master/install-nimbix.sh \
+    | bash
 
 # Expose port 22 for local JARVICE emulation in docker
 EXPOSE 22
